@@ -1,0 +1,24 @@
+services:
+    postgres:
+        image: postgres:18
+        container_name: postgres
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        ports:
+            - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        restart: unless-stopped
+        networks:
+            - postgres
+networks:
+    postgres:
+        ipam:
+            driver: default
+            config:
+                - subnet: "172.27.0.0/24"
