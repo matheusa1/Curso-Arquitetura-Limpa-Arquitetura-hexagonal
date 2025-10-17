@@ -5,7 +5,7 @@ export class ProvedorJWT {
 
 	gerar(dados: string | object): string {
 		return jwt.sign(dados, this.segredo, {
-			expiresIn: "1s",
+			expiresIn: "1d",
 		});
 	}
 
